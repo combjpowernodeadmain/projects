@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--  namespace：必dao接口的全限定名称 -->
+<mapper namespace="com.wkcto.dao.StudentDao">
+    <insert id="insertStudent">
+        insert into student(id,name,email,age)
+        values(#{id},#{name},#{email},#{age})
+    </insert>
+
+    <insert id="insertStudentModel">
+        insert into student(id,name,email,age)
+        values(#{id},#{name},#{email},#{age})
+    </insert>
+
+    <insert id="insertBatch">
+        insert into student(id,name,email,age) values
+        <foreach collection="list" open="" close="" separator="," item="sm">
+            (#{sm.id},#{sm.name},#{sm.email},#{sm.age})
+        </foreach>
+
+    </insert>
+
+
+    <select id="selectStudents" resultType="com.wkcto.model.ViewStudentModel">
+        select id,name,email,age from student order by id limit #{pageNo},#{pageSize}
+    </select>
+
+</mapper>
